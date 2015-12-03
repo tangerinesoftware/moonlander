@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope="" itemtype="http://schema.org/WebPage">
+<head>
+  <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body background="moon_texture.jpg" id="body">
+  <div class="container">
+    <div class="jumbotron">
+    <div class="row">
+    <div class="col-sm-2"><img height="150" width="150" src="moon.jpg"></img></div>
+    <div class="col-sm-10"><h2>Moonlander</h2><p>Landing a moonlander by Genetic Programming</p></div>
+  </div>
+</div>
+  </div>
+
+  <div class="container">
+    <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2>Genetic Programming</h2><p>Genetic programming can be used to find computer programs in a way that that is inspired by biological evolution.
+It is a machine learning technique that uses an evolutionary algorithm to optimize a population of
+computer programs according to a fitness functions. In the search process <i>crossover</i> and <i>mutation</i> are used to generate new programs.
+</p><p>
+In short, the process starts with a random population of programs. Each program is evaluated and becomes a score.
+From this population new programs are generated using crossover and mutation. The new programs are evaluated and
+replace existing programs if the new program better solves the problem.
+</p><p>The demo below finds solutions for landing a moonlander. Initially the moonlander is hovering at 100 meter above the surface.
+The gravity of the moon pulls the lander down, and by giving thrust the lander can land in a controlled way. Note that
+only a limited amount of fuel is available.
+</p><p>To see it in action, first select the parameters for the run. By clicking "new" , a random population will be generated. You can watch the performance of each program
+ by clicking "show". The actual search is started by clicking "Go". The search will continue until you press "pause".</p>
+ </div>
+</div>
+</div>
+<div class="container">
+
+  <div class="row">
+  <div class="col-sm-3">
+
+<div class="panel panel-default">
+  <div class="panel-heading">Setup</div>
+   <div class="panel-body">
+   <label for="sel1">Population Size:</label>
+     <select class="form-control" id="popSize">
+       <option>10</option>
+       <option>20</option>
+       <option>30</option>
+       <option>40</option>
+       <option>50</option>
+       <option>100</option>
+       <option>500</option>
+       <option>1000</option>
+     </select>
+
+     <label for="sel1">Show Top:</label>
+       <select class="form-control" id="showTop">
+         <option>5</option>
+         <option>10</option>
+         <option>20</option>
+       </select>
+
+       <label for="sel1">Allowed Operators:</label>
+         <select class="form-control" id="oper">
+           <option>+ - * /</option>
+           <option>+ - * / sqrt log exp sin</option>
+         </select>
+<label for="comment">Goal:</label>
+<div class="radio">
+<label><input type="radio" name="goal" >Minimize landing speed</label>
+</div>
+<div class="radio">
+<label><input type="radio" name="goal">Minimize landing speed (if v&gt;5) and save fuel</label>
+</div>
+<div class="radio">
+<label><input type="radio" name="goal" >Minimize landing speed (if v&gt;5) and burn as much fuel as possible</label>
+</div>
+<div class="radio">
+<label><input type="radio" name="goal" >Minimize landing speed (if v&gt;5), yet land quickly</label>
+</div>
+<div class="radio">
+<label><input type="radio" name="goal">Maximize landing speed</label>
+</div>
+<div class="radio">
+<label><input type="radio" name="goal">Custom</label>
+</div>
+
+    <textarea class="form-control" rows="1" id="user"></textarea>
+   <br>
+ </div>
+ </div>
+ </div>
+
+
+   <div class="col-sm-9">
+     <div class="panel panel-default">
+     <div class="panel-heading">Evolution Control</div>
+     <div class="panel-body">
+     <input class="btn btn-primary" type="submit" onClick="populate()" id="bNew" value="New">
+     <input class="btn btn-primary" type="submit" onClick="onGo()" id="bGo" value="Go">
+     <input class="btn btn-primary" type="submit" onClick="onPause()" id="bPause" value="Pause">
+   </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Goal:</div>
+      <div class="panel-body" id="goaltext"></div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">Population:</div>
+      <div class="panel-body" id="dump"></div>
+    </div>
+    </div>
+ </div>
+
+ <div class="panel panel-default">
+ <div class="panel-heading">Output:</div>
+ <div class="panel-body">
+
+   <div class="row">
+     <div class="col-sm-2"><canvas width="100" height="290" id="canvas"></canvas></div>
+    <div class="col-sm-3"><p>Height (h)</p><canvas width="180" height="120" id="canvas1"></canvas></div>
+    <div class="col-sm-3"><p>Speed (v)</p><canvas width="180" height="120" id="canvas2"></canvas></div>
+    <div class="col-sm-3"><p>Thrust<a href="#" onClick="clearGraph()">  Clear</a></p><canvas width="180" height="120" id="canvas3"></canvas></div>
+  </div>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-6">
+  <table class="table">
+
+    <tbody>
+      <tr>
+        <td><p style="color:blue">Height:</p><div id="mhe">0.00</div></td>
+        <td><p style="color:blue">Fuel:</p><div id="mfu">0.00</div></td>
+        <td><p style="color:blue">Thrust:</p><div id="mth">0.00</div></td>
+      </tr>
+      <tr>
+        <td><p style="color:blue">Time:</p><div id="mti">0.00</div></td>
+        <td><p style="color:blue">Speed:</p><div id="msp">0.00</div></td>
+        <td><p style="color:blue">Mass:</p><div id="mma">0.00</div></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>
+</div>
+<script src="jscript.js"></script>
+
+
+</body>
+</html>
