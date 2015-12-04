@@ -10,6 +10,7 @@
 <body background="moon_texture.jpg" id="body">
   <div class="container">
     <div class="jumbotron">
+      <a href="https://github.com/tangerinesoftware/moonlander"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
     <div class="row">
     <div class="col-sm-2"><img height="150" width="150" src="moon.jpg"></img></div>
     <div class="col-sm-10"><h2>Moonlander</h2><p>Landing a moonlander by Genetic Programming</p></div>
@@ -135,6 +136,11 @@ only a limited amount of fuel is available.
 
     <tbody>
       <tr>
+        <td><p style="color:blue">Warning Fuel:</p><img id="fuel_light" src="led_off.png" height="30" width="30"></img></td>
+        <td><p style="color:blue">Warning Speed:</p><img id="speed_light" src="led_off.png" height="30" width="30"></img></td>
+        <td><p style="color:blue">Warning Height:</p><img id="height_light" src="led_off.png" height="30" width="30"></img></td>
+      </tr>
+      <tr>
         <td><p style="color:blue">Height:</p><div id="mhe">0.00</div></td>
         <td><p style="color:blue">Fuel:</p><div id="mfu">0.00</div></td>
         <td><p style="color:blue">Thrust:</p><div id="mth">0.00</div></td>
@@ -151,6 +157,26 @@ only a limited amount of fuel is available.
 </div>
 </div>
 <script src="jscript.js"></script>
+<script type="text/javascript">
+// Listen to when an image src or alt gets changed (ex: slideshow, etc.)
+document.getElementById("mfu").addEventListener("DOMSubtreeModified", function(e) {
+	// Record the occurrence
+  if (parseInt(this.innerHTML) <=50){document.getElementById("fuel_light").src="led_on.png";}else{document.getElementById("fuel_light").src="led_off.png";}
+
+}, false);
+document.getElementById("msp").addEventListener("DOMSubtreeModified", function(e) {
+	// Record the occurrence
+  if (parseInt(this.innerHTML) >=5){document.getElementById("speed_light").src="led_on.png";}else{document.getElementById("speed_light").src="led_off.png";}
+
+}, false);
+document.getElementById("mhe").addEventListener("DOMSubtreeModified", function(e) {
+	// Record the occurrence
+  if (parseInt(this.innerHTML) >=200){document.getElementById("height_light").src="led_on.png";}else{document.getElementById("height_light").src="led_off.png";}
+
+}, false);
+
+</script>
+
 
 
 </body>

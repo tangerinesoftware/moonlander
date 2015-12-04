@@ -230,14 +230,14 @@ function draw(i){
 
 
   ctx = document.getElementById('canvas2').getContext('2d');
-ctx.strokeStyle=colors[colmod];
+  ctx.strokeStyle=colors[colmod];
   ctx.beginPath();
   ctx.moveTo(5+multi*secc,120-5-speeds[secc]*3);
   ctx.lineTo(5+multi*(secc+1),120-5-speeds[secc+1]*3);
   ctx.stroke();
 
   ctx = document.getElementById('canvas3').getContext('2d');
-ctx.strokeStyle=colors[colmod];
+  ctx.strokeStyle=colors[colmod];
   ctx.beginPath();
   ctx.moveTo(10+multi*secc,120-5-powers[secc]);
   ctx.lineTo(10+multi*(secc+1),120-5-powers[secc+1]);
