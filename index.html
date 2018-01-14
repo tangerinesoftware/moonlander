@@ -46,46 +46,46 @@ only a limited amount of fuel is available.
    <div class="panel-body">
    <label for="sel1">Population Size:</label>
      <select class="form-control" id="popSize">
-       <option>10</option>
-       <option>20</option>
-       <option>30</option>
-       <option>40</option>
-       <option>50</option>
-       <option>100</option>
-       <option>500</option>
-       <option>1000</option>
+       <option value=10>10</option>
+       <option  value=20>20</option>
+       <option> value=30>30</option>
+       <option> value=40>40</option>
+       <option> value=50>50</option>
+       <option> value=100>100</option>
+       <option> value=500>500</option>
+       <option> value=1000>1000</option>
      </select>
 
      <label for="sel1">Show Top:</label>
        <select class="form-control" id="showTop">
-         <option>5</option>
-         <option>10</option>
-         <option>20</option>
+         <option value=5>5</option>
+         <option value=10>10</option>
+         <option value=20>20</option>
        </select>
 
        <label for="sel1">Allowed Operators:</label>
          <select class="form-control" id="oper">
-           <option>+ - * /</option>
-           <option>+ - * / sqrt log exp sin</option>
+           <option value="norm">+ - * /</option>
+           <option value="full">+ - * / sqrt log exp sin</option>
          </select>
 <label for="comment">Goal:</label>
 <div class="radio">
-<label><input type="radio" name="goal" >Minimize landing speed</label>
+<label><input type="radio" name="goal" value=0>Minimize landing speed</label>
 </div>
 <div class="radio">
-<label><input type="radio" name="goal">Minimize landing speed (if v&gt;5) and save fuel</label>
+<label><input type="radio" name="goal" value=1>Minimize landing speed (if v&gt;5) and save fuel</label>
 </div>
 <div class="radio">
-<label><input type="radio" name="goal" >Minimize landing speed (if v&gt;5) and burn as much fuel as possible</label>
+<label><input type="radio" name="goal" value=2>Minimize landing speed (if v&gt;5) and burn as much fuel as possible</label>
 </div>
 <div class="radio">
-<label><input type="radio" name="goal" >Minimize landing speed (if v&gt;5), yet land quickly</label>
+<label><input type="radio" name="goal" value=3>Minimize landing speed (if v&gt;5), yet land quickly</label>
 </div>
 <div class="radio">
-<label><input type="radio" name="goal">Maximize landing speed</label>
+<label><input type="radio" name="goal" value=4>Maximize landing speed</label>
 </div>
 <div class="radio">
-<label><input type="radio" name="goal">Custom</label>
+<label><input type="radio" name="goal" value=5>Custom</label>
 </div>
 
     <textarea class="form-control" rows="1" id="user"></textarea>
