@@ -1,1 +1,1 @@
-Demo site http://t21.servehttp.com/moonlander/#
+Demo site  https://tangerinesoftware.github.io/moonlander/
